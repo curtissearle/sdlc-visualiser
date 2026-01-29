@@ -1,0 +1,68 @@
+{
+  "id": "kanban",
+  "name": "Kanban",
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": "backlog",
+      "type": "stage",
+      "title": "Backlog",
+      "description": "Pool of prioritised work items",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "backlog-linear", "toolId": "linear", "category": "issue-tracking" }
+      ]
+    },
+    {
+      "id": "todo",
+      "type": "stage",
+      "title": "To Do",
+      "description": "Ready for development",
+      "tags": ["manual"]
+    },
+    {
+      "id": "in-progress",
+      "type": "stage",
+      "title": "In Progress",
+      "description": "Actively being implemented",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "ip-gitlab", "toolId": "gitlab", "category": "scm" }
+      ]
+    },
+    {
+      "id": "code-review",
+      "type": "gate",
+      "title": "Code Review",
+      "description": "Peer review required",
+      "tags": ["manual"]
+    },
+    {
+      "id": "testing",
+      "type": "stage",
+      "title": "Testing",
+      "description": "Automated and manual testing",
+      "tags": ["automated"],
+      "attachedTools": [
+        { "id": "test-ci", "toolId": "gitlab-ci", "category": "ci" },
+        { "id": "test-cypress", "toolId": "cypress", "category": "qa" }
+      ]
+    },
+    {
+      "id": "done",
+      "type": "stage",
+      "title": "Done",
+      "description": "Meets acceptance criteria and released",
+      "tags": ["manual"]
+    }
+  ],
+  "edges": [
+    { "id": "e1", "fromNodeId": "backlog", "toNodeId": "todo" },
+    { "id": "e2", "fromNodeId": "todo", "toNodeId": "in-progress" },
+    { "id": "e3", "fromNodeId": "in-progress", "toNodeId": "code-review" },
+    { "id": "e4", "fromNodeId": "code-review", "toNodeId": "testing" },
+    { "id": "e5", "fromNodeId": "testing", "toNodeId": "done" }
+  ]
+}
+
+

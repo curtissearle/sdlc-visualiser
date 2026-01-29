@@ -1,0 +1,56 @@
+{
+  "id": "basic-sdlc",
+  "name": "Basic SDLC",
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": "plan",
+      "type": "stage",
+      "title": "Plan",
+      "description": "Define requirements and design",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "plan-gitlab", "toolId": "gitlab", "category": "scm" }
+      ]
+    },
+    {
+      "id": "build",
+      "type": "stage",
+      "title": "Build",
+      "description": "Write and commit code",
+      "tags": ["automated"],
+      "attachedTools": [
+        { "id": "build-gitlab", "toolId": "gitlab", "category": "scm" }
+      ]
+    },
+    {
+      "id": "test",
+      "type": "stage",
+      "title": "Test",
+      "description": "Run tests and QA",
+      "tags": ["automated"]
+    },
+    {
+      "id": "deploy",
+      "type": "stage",
+      "title": "Deploy",
+      "description": "Deploy to production",
+      "tags": ["automated"]
+    },
+    {
+      "id": "operate",
+      "type": "stage",
+      "title": "Operate",
+      "description": "Monitor and maintain",
+      "tags": ["manual"]
+    }
+  ],
+  "edges": [
+    { "id": "e1", "fromNodeId": "plan", "toNodeId": "build" },
+    { "id": "e2", "fromNodeId": "build", "toNodeId": "test" },
+    { "id": "e3", "fromNodeId": "test", "toNodeId": "deploy" },
+    { "id": "e4", "fromNodeId": "deploy", "toNodeId": "operate" }
+  ]
+}
+
+

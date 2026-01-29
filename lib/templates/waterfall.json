@@ -1,0 +1,74 @@
+{
+  "id": "waterfall",
+  "name": "Waterfall",
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": "requirements",
+      "type": "stage",
+      "title": "Requirements",
+      "description": "Capture and sign off requirements",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "requirements-jira", "toolId": "jira", "category": "issue-tracking" }
+      ]
+    },
+    {
+      "id": "design",
+      "type": "stage",
+      "title": "Design",
+      "description": "System and architecture design",
+      "tags": ["manual"]
+    },
+    {
+      "id": "implementation",
+      "type": "stage",
+      "title": "Implementation",
+      "description": "Develop and integrate code",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "impl-gitlab", "toolId": "gitlab", "category": "scm" }
+      ]
+    },
+    {
+      "id": "verification",
+      "type": "stage",
+      "title": "Verification",
+      "description": "Testing and verification",
+      "tags": ["automated"],
+      "attachedTools": [
+        { "id": "verification-ci", "toolId": "github-actions", "category": "ci" },
+        { "id": "verification-qa", "toolId": "cypress", "category": "qa" }
+      ]
+    },
+    {
+      "id": "deployment",
+      "type": "stage",
+      "title": "Deployment",
+      "description": "Release to production",
+      "tags": ["automated"],
+      "attachedTools": [
+        { "id": "deploy-argocd", "toolId": "argocd", "category": "cd" }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "type": "stage",
+      "title": "Maintenance",
+      "description": "Operate and maintain system",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "ops-datadog", "toolId": "datadog", "category": "observability" }
+      ]
+    }
+  ],
+  "edges": [
+    { "id": "e1", "fromNodeId": "requirements", "toNodeId": "design" },
+    { "id": "e2", "fromNodeId": "design", "toNodeId": "implementation" },
+    { "id": "e3", "fromNodeId": "implementation", "toNodeId": "verification" },
+    { "id": "e4", "fromNodeId": "verification", "toNodeId": "deployment" },
+    { "id": "e5", "fromNodeId": "deployment", "toNodeId": "maintenance" }
+  ]
+}
+
+

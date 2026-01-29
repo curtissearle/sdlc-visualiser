@@ -1,0 +1,90 @@
+{
+  "id": "dual-track",
+  "name": "Dual-track Discovery & Delivery",
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": "discovery-backlog",
+      "type": "stage",
+      "title": "Discovery Backlog",
+      "description": "Hypotheses and opportunities to explore",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "disc-backlog-jira", "toolId": "jira", "category": "issue-tracking" }
+      ]
+    },
+    {
+      "id": "research",
+      "type": "stage",
+      "title": "Research",
+      "description": "User research and problem discovery",
+      "tags": ["manual"]
+    },
+    {
+      "id": "prototype",
+      "type": "stage",
+      "title": "Prototype",
+      "description": "Design and prototype potential solutions",
+      "tags": ["manual"]
+    },
+    {
+      "id": "validation",
+      "type": "gate",
+      "title": "Validation",
+      "description": "Validate solution with users and stakeholders",
+      "tags": ["manual"]
+    },
+    {
+      "id": "delivery-backlog",
+      "type": "stage",
+      "title": "Delivery Backlog",
+      "description": "Validated work ready for delivery",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "deliv-backlog-jira", "toolId": "jira", "category": "issue-tracking" }
+      ]
+    },
+    {
+      "id": "implementation",
+      "type": "stage",
+      "title": "Implementation",
+      "description": "Engineering delivery of validated work",
+      "tags": ["manual"],
+      "attachedTools": [
+        { "id": "impl-github", "toolId": "github", "category": "scm" }
+      ]
+    },
+    {
+      "id": "ci-tests",
+      "type": "stage",
+      "title": "CI & Tests",
+      "description": "Automated tests and quality checks",
+      "tags": ["automated"],
+      "attachedTools": [
+        { "id": "ci-gh-actions", "toolId": "github-actions", "category": "ci" },
+        { "id": "qa-playwright", "toolId": "playwright", "category": "qa" }
+      ]
+    },
+    {
+      "id": "release",
+      "type": "stage",
+      "title": "Release",
+      "description": "Deploy and launch to users",
+      "tags": ["automated"],
+      "attachedTools": [
+        { "id": "release-argocd", "toolId": "argocd", "category": "cd" }
+      ]
+    }
+  ],
+  "edges": [
+    { "id": "e1", "fromNodeId": "discovery-backlog", "toNodeId": "research" },
+    { "id": "e2", "fromNodeId": "research", "toNodeId": "prototype" },
+    { "id": "e3", "fromNodeId": "prototype", "toNodeId": "validation" },
+    { "id": "e4", "fromNodeId": "validation", "toNodeId": "delivery-backlog" },
+    { "id": "e5", "fromNodeId": "delivery-backlog", "toNodeId": "implementation" },
+    { "id": "e6", "fromNodeId": "implementation", "toNodeId": "ci-tests" },
+    { "id": "e7", "fromNodeId": "ci-tests", "toNodeId": "release" }
+  ]
+}
+
+
